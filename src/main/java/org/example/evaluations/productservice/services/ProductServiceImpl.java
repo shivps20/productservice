@@ -7,6 +7,7 @@ import org.example.evaluations.productservice.repositories.CategoryRepository;
 import org.example.evaluations.productservice.repositories.ProductRepository;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Optional;
@@ -79,7 +80,7 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
-    public Product getSingleProduct(Long id) throws ProductNotFoundException {
+    public Product getSingleProduct(@PathVariable("id") Long id) throws ProductNotFoundException {
         Optional<Product> product = productRepository.findById(id);
 
         if(product.isEmpty()) {
