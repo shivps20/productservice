@@ -4,12 +4,14 @@ import org.example.evaluations.productservice.models.Category;
 import org.example.evaluations.productservice.models.Product;
 import org.example.evaluations.productservice.repositories.CategoryRepository;
 import org.example.evaluations.productservice.repositories.ProductRepository;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Primary
 public class ProductServiceImpl implements IProductService {
 
     private final CategoryRepository categoryRepository;
