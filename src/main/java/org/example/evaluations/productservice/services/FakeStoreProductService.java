@@ -1,6 +1,7 @@
 package org.example.evaluations.productservice.services;
 
 import org.example.evaluations.productservice.dtos.FakeStoreProductDTO;
+import org.example.evaluations.productservice.exceptions.ProductNotFoundException;
 import org.example.evaluations.productservice.models.Product;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -22,6 +23,22 @@ public class FakeStoreProductService implements IProductService{
                                    ResourceUrlProvider resourceUrlProvider){
         this.restTemplate = restTemplate;
         this.resourceUrlProvider = resourceUrlProvider;
+    }
+
+    @Override
+    public Product getSingleProduct(Long id) throws ProductNotFoundException {
+        FakeStoreProductDTO response = restTemplate.getForObject(
+                "https://fakestoreapi.com/products/" + id,
+                FakeStoreProductDTO.class);
+
+        if(response == null){
+            //Isn't null response an exception / unexpected
+            //Should we throw an exception here
+            //Should we handle this exception in some sort
+            throw new ProductNotFoundException("Product with id " + id + " not found");
+        }
+
+        return response.toProduct();
     }
 
     @Override

@@ -1,5 +1,6 @@
 package org.example.evaluations.productservice.services;
 
+import org.example.evaluations.productservice.exceptions.ProductNotFoundException;
 import org.example.evaluations.productservice.models.Category;
 import org.example.evaluations.productservice.models.Product;
 import org.example.evaluations.productservice.repositories.CategoryRepository;
@@ -75,5 +76,16 @@ public class ProductServiceImpl implements IProductService {
     @Override
     public List<Product> getAllProducts() {
         return productRepository.findAll();
+    }
+
+    @Override
+    public Product getSingleProduct(Long id) throws ProductNotFoundException {
+        Optional<Product> product = productRepository.findById(id);
+
+        if(product.isEmpty()) {
+            throw new ProductNotFoundException("Product with id " + id + " not found");
+        }
+
+        return product.get();
     }
 }

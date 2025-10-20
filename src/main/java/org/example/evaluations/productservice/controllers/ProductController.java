@@ -47,14 +47,20 @@ public class ProductController {
         return ResponseEntity.ok(product);
     }
 
-    @DeleteMapping("/products/{id}")
+    @DeleteMapping("/{id}")
     public void deleteProduct(@PathVariable("id") Long id) throws ProductNotFoundException {
 
     }
 
     @GetMapping("/all")
-    public List<Product> getAllProducts() {
-        return productService.getAllProducts();
+    public ResponseEntity<List<Product>> getAllProducts() {
+        return ResponseEntity.ok(productService.getAllProducts());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Product> getProductById(@PathVariable Long id) throws ProductNotFoundException {
+        Product product = productService.getSingleProduct(id);
+        return ResponseEntity.ok(product);
     }
 }
 
