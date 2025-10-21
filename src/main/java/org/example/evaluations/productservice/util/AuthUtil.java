@@ -19,6 +19,9 @@ public class AuthUtil {
         /**
          *  Make a call to User Service's /users/validate/{token} endpoint to validate the token
          *  Now this API returns a UserDto object in response body so to handle that we can create a UserDto class in product service as well
+         *
+         *  Note: We would not need the UserDto, if we are using JWT tokens, because in that case we can validate
+         *  the token locally using the secret in the JWT, without making a call to User Service
          */
         ResponseEntity<UserDto> response = restTemplate.getForEntity("http://localhost:8080/users/validate/"+tokenValue, UserDto.class);
 
