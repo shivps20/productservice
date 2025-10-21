@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Primary
+//@Primary
 public class ProductServiceImpl implements IProductService {
 
     private final CategoryRepository categoryRepository;
